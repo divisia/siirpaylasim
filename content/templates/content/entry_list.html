@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>Tüm şiirler</h1>
+<ol>
+    {% for entry in entries %}
+    <li>{{ entry.title }}</li>
+    {% empty %}
+    <li>[Hiç şiir yok.]</li>
+    {% endfor %}
+</ol>
+
+{% endblock body %}
