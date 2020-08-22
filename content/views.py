@@ -17,3 +17,8 @@ class EntryList(ListView):
 
 class EntryCreate(CreateView):
     model = Entry
+
+
+class Home(View):
+    def get(self, request):
+        return render(request, 'home.html', {})
