@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'content.apps.ContentConfig',
     'identity.apps.IdentityConfig',
     #'pinax.likes',
+    #'pinax.messages',
 ]
 
 MIDDLEWARE = [
@@ -115,4 +116,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'statik')
 
 # Auth
+LOGIN_URL = 'identity:login'
 LOGIN_REDIRECT_URL = 'content:home'

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>şiir silinecek: {{ object }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p>kalıcı olarak silinsin mi?</p>
+    <input type="submit" value="evet, sil">
+</form>
+
+{% endblock body %}

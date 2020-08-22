@@ -5,7 +5,7 @@
 <h1>Tüm şiirler</h1>
 <ol>
     {% for entry in entries %}
-    <li>{{ entry.title }}</li>
+    <li><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></li>
     {% empty %}
     <li>[Hiç şiir yok.]</li>
     {% endfor %}
