@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'pinax.templates',
     'pinax.likes',
+    'django_extensions',
 ]
 
 SITE_ID = 1
