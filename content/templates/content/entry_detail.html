@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static pinax_likes_tags %}
+{% load static pinax_likes_tags pinax_comments_tags bootstrap %}
 
 {% block head %}
 <script defer src="{% static 'jquery-3.5.1.min.js' %}"></script>
@@ -12,5 +12,32 @@
 <p>{{ entry.body }}</p>
 
 {% likes_widget request.user entry %}
+
+<div class="list-group">
+    <div class="list-group-item">
+        {% comment_target wall_user as post_url %}
+        {% comment_form wall_user as comment_form %}
+        <form class="form" method="post" action="{{ post_url }}">
+            {% csrf_token %}
+            {{ comment_form|bootstrap }}
+            <button class="btn btn-primary">Post Message</button>
+        </form>
+    </div>
+    
+    {% comments wall_user as wall_comments %}
+    {% for comment in wall_comments %}
+    <div class="list-group-item">
+        {{ comment.comment|linebreaks }}
+        <div class="meta">
+            <small class="text-muted pull-right">{{ comment.submit_date }}</small>
+            <small class="text-muted">
+                <a href="{% url 'wall' comment.author.username %}">
+                    {{ comment.author }}
+                </a>
+            </small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock body %}
