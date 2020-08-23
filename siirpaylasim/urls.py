@@ -10,6 +10,7 @@ urlpatterns = [
     
     path("mesajlar/", include("pinax.messages.urls", namespace="pinax_messages")),
     path('begeniler/', include('pinax.likes.urls', namespace='pinax_likes')),
+    path("yorumlar/", include("pinax.comments.urls", namespace="pinax_comments"))
 ]
 
 if settings.DEBUG:

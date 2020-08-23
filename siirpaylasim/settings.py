@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'pinax.templates',
     'pinax.likes',
     'pinax.messages',
+    'pinax.comments',
     'django_extensions',
 ]
 
