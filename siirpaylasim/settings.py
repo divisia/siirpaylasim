@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'pinax.templates',
     'pinax.likes',
+    'pinax.messages',
     'django_extensions',
 ]
 
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "pinax.messages.context_processors.user_messages",
             ],
         },
     },

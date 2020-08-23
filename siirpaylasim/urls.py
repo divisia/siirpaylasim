@@ -8,7 +8,8 @@ urlpatterns = [
     path('', include('content.urls')),
     path('', include('identity.urls')),
     
-    path('likes/', include('pinax.likes.urls', namespace='pinax_likes')),
+    path("mesajlar/", include("pinax.messages.urls", namespace="pinax_messages")),
+    path('begeniler/', include('pinax.likes.urls', namespace='pinax_likes')),
 ]
 
 if settings.DEBUG:
