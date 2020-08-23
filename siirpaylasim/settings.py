@@ -16,6 +16,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
+    '192.168.43.182',
 ]
 
 
@@ -124,8 +125,8 @@ LOGIN_URL = 'identity:login'
 LOGIN_REDIRECT_URL = 'content:home'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'pinax.likes.auth_backends.CanLikeBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Pinax config

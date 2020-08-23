@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ doc.title|default:'Şiir Paylaşım' }}</title>
 
+    <link rel="stylesheet" href="{% static 'fontawesome.min.css' %}">
     {% block head %}
     {% endblock head %}
 </head>
