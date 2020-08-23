@@ -26,13 +26,17 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'content.apps.ContentConfig',
     'identity.apps.IdentityConfig',
+    'bootstrapform',
+    'pinax.templates',
     'pinax.likes',
-    'pinax.messages',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +61,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'pinax.messages.context_processors.user_messages',
             ],
         },
     },
@@ -101,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'tr-tr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 
@@ -113,9 +116,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'statik')
+STATIC_URL = '/statik/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Auth
 LOGIN_URL = 'identity:login'
 LOGIN_REDIRECT_URL = 'content:home'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'pinax.likes.auth_backends.CanLikeBackend',
+]
+
+# Pinax config
+PINAX_LIKES_LIKABLE_MODELS = {
+    'content.Entry': {
+    }
+}
