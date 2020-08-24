@@ -15,8 +15,8 @@
 
 <div class="list-group">
     <div class="list-group-item">
-        {% comment_target wall_user as post_url %}
-        {% comment_form wall_user as comment_form %}
+        {% comment_target entry as post_url %}
+        {% comment_form entry as comment_form %}
         <form class="form" method="post" action="{{ post_url }}">
             {% csrf_token %}
             {{ comment_form|bootstrap }}
@@ -24,14 +24,14 @@
         </form>
     </div>
     
-    {% comments wall_user as wall_comments %}
+    {% comments entry as wall_comments %}
     {% for comment in wall_comments %}
     <div class="list-group-item">
         {{ comment.comment|linebreaks }}
         <div class="meta">
             <small class="text-muted pull-right">{{ comment.submit_date }}</small>
             <small class="text-muted">
-                <a href="{% url 'wall' comment.author.username %}">
+                <a>
                     {{ comment.author }}
                 </a>
             </small>
