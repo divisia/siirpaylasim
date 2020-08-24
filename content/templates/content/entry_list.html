@@ -2,6 +2,7 @@
 
 {% block body %}
 
+<h2><a href="{% url 'content:entry_create' %}">Yeni şiir yaz</a></h2>
 <h1>Tüm şiirler</h1>
 <ol>
     {% for entry in entries %}
