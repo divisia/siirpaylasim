@@ -8,8 +8,16 @@
 
 {% block body %}
 
+<h4>yazar: {{ entry.author.username }}</h4>
+
+{% if editable %}
+<a href="{% url 'content:entry_edit' entry.slug %}">Düzenle</a>
+<a href="{% url 'content:entry_delete' entry.slug %}">Sil</a>
+<br>
+{% endif %}
+
 <h1>{{ entry.title }}</h1>
-<p>{{ entry.body }}</p>
+<h3><pre>{{ entry.body }}</pre></h3>
 
 {% likes_widget request.user entry %}
 
