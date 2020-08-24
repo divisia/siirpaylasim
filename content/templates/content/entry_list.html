@@ -3,6 +3,16 @@
 {% block body %}
 
 <h2><a href="{% url 'content:entry_create' %}">Yeni şiir yaz</a></h2>
+
+{% if selected.count > 0 %}
+<h3>
+    Haftanın şiiri ({{ selected.count }} beğeni ile):
+    <a href="{{ selected.entry.get_absolute_url }}">{{ selected.entry }}</a>
+</h3>
+{% else %}
+<h3>Haftanın şiirini seçecek kadar veri yok.</h3>
+{% endif %}
+
 <h1>Tüm şiirler</h1>
 <ol>
     {% for entry in entries %}

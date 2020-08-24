@@ -3,7 +3,10 @@ from django.views import View
 from django.core.exceptions import SuspiciousOperation
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.views.generic import DetailView
 from django.conf import settings
+
 
 class RegisterView(View):
     template = 'registration/login.html'
@@ -24,3 +27,13 @@ class RegisterView(View):
 
         except:
             raise SuspiciousOperation
+
+
+class ProfileView(DetailView):
+    model = User
+    context_object_name = 'user'
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(ProfileView, self).get_context_data(*args, **kwargs)
+        ctx['editable'] = self.request.user == self.get_object()
+        return ctx
