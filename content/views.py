@@ -75,8 +75,11 @@ class EntryDelete(LoginRequiredMixin, DeleteView):
 
 class Home(View):
     def get(self, request):
-        return render(request, 'home.html', {})
-
+        return render(request, 'home.html', {
+            'selected':get_entry_with_most_likes(
+            after=date.today()-highlighted_interval
+        )
+        })
 
 
 def get_entry_with_most_likes(after=None, before=None):

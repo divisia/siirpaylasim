@@ -4,7 +4,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.conf import settings
 
 
@@ -29,7 +29,7 @@ class RegisterView(View):
             raise SuspiciousOperation
 
 
-class ProfileView(DetailView):
+class UserDetail(DetailView):
     model = User
     context_object_name = 'user'
 
@@ -37,3 +37,8 @@ class ProfileView(DetailView):
         ctx = super(ProfileView, self).get_context_data(*args, **kwargs)
         ctx['editable'] = self.request.user == self.get_object()
         return ctx
+
+
+class UserList(ListView):
+    model = User
+    context_object_name = 'users'

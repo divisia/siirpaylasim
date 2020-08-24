@@ -2,10 +2,35 @@
 
 {% block body %}
 
-<h1>ev sayfası</h1>
+<div class="slider-main h-800x h-sm-auto pos-relative pt-95 pb-25">
+    <div class="img-bg bg-1 bg-layer-4"></div>
+    <div class="container-fluid h-100 mt-xs-50">
+    
+        <div class="row h-100">
+            <div class="col-md-1"></div>
+            <div class="col-sm-12 col-md-5 h-100 h-sm-50">
+                <div class="dplay-tbl">
+                    <div class="dplay-tbl-cell color-white mtb-30">
+                        <div class="mx-w-400x">
+                            {% if selected.count > 0 %}
+                            <h1 class="mt-20 mb-30">Haftanın şiiri: <b>{{ selected.entry.title }}</b></h1>
+                            <h6><a class="plr-20 btn-brdr-grey color-white" href="{{ selected.entry.get_absolute_url }}"><b>OKU</b></a></h6>
+                            {% else %}
+                            <h1 class="mt-20 mb-30"><b>Şiir paylaşım sitesi</b></h1>
+                            <h6><a class="plr-20 btn-brdr-grey color-white" href="{% url 'content:entry_create' %}"><b>Yazmaya başla</b></a></h6>
+                            {% endif %}
+                        </div><!-- mx-w-200x -->
+                    </div><!-- dplay-tbl-cell -->
+                </div><!-- dplay-tbl -->
+            </div><!-- col-sm-6 -->
+            
+            
+            
+        </div><!-- row -->
+    </div><!-- container -->
+</div><!-- slider-main -->
 
-<a href="{% url 'pinax_messages:inbox' %}">DM</a>
-<a href="{% url 'content:entry_list' %}">şiirler</a>
+
 
 
 {% endblock body %}
