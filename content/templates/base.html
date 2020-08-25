@@ -35,8 +35,8 @@
 			<li><a href="{% url 'content:entry_list' %}">Şiirler</a></li>
 			<li><a href="{% url 'identity:user_list' %}">Şairler</a></li>
 			{% if not request.user.is_authenticated %}
-			<li><a href="{% url 'login' %}">Giriş yap</a></li>
-			<li><a href="{% url 'register' %}">Kaydol</a></li>
+			<li><a href="{% url 'identity:login' %}">Giriş yap</a></li>
+			<li><a href="{% url 'identity:register' %}">Kaydol</a></li>
 			{% else %}
 			<li><a href="{% url 'identity:user_detail' request.user.pk %}">Hesap: {{ request.user.username }}</a></li>
 			{% endif %}
