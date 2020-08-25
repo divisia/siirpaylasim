@@ -4,14 +4,9 @@ from django.views import View
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.contenttypes.models import ContentType
-from pinax.likes.models import Like
 from datetime import date, timedelta
 from .models import *
 from .forms import *
-
-
-highlighted_interval = timedelta(weeks=1)
 
 
 class EntryDetail(DetailView):
@@ -28,12 +23,6 @@ class EntryList(ListView):
     model = Entry
     context_object_name = 'entries'
 
-    def get_context_data(self, *args, **kwargs):
-        ctx = super(EntryList, self).get_context_data(*args, **kwargs)
-        ctx['selected'] = get_entry_with_most_likes(
-            after=date.today()-highlighted_interval
-        )
-        return ctx
 
 
 class EntryCreate(LoginRequiredMixin, CreateView):
@@ -75,30 +64,7 @@ class EntryDelete(LoginRequiredMixin, DeleteView):
 
 class Home(View):
     def get(self, request):
-        return render(request, 'home.html', {
-            'selected':get_entry_with_most_likes(
-            after=date.today()-highlighted_interval
-        )
-        })
+        return render(request, 'home.html')
 
 
-def get_entry_with_most_likes(after=None, before=None):
-    qs = Entry.objects.all()
-    if after:
-        qs = qs.filter(created_at__gte=after)
-    if before:
-        qs = qs.filter(created_at__lte=before)
-    
-    selected = {'count': -1}
-    for entry in qs:
-        count = Like.objects.filter(
-            receiver_content_type=ContentType.objects.get_for_model(entry),
-            receiver_object_id=entry.pk,
-        ).count()
-        if count > selected['count']:
-            selected['pk'] = entry.pk
-            selected['count'] = count
-            selected['entry'] = entry
 
-    return selected
-    
