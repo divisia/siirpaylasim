@@ -1,0 +1,13 @@
+asgiref==3.2.10
+Django==3.1
+django-appconf==1.0.4
+django-bootstrap-form==3.4
+django-extensions==3.0.5
+Pinax==0.9a2
+pinax-comments==2.0.0
+pinax-likes==4.0.0
+pinax-messages==3.0.0
+pinax-templates==2.0.6
+pygraphviz==1.6
+pytz==2020.1
+sqlparse==0.3.1
