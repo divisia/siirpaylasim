@@ -1,4 +1,5 @@
-from django.forms import ModelForm
+from django import forms
+from django.forms import ModelForm, TextInput, Textarea
 from .models import *
 
 class EntryForm(ModelForm):
@@ -8,3 +9,7 @@ class EntryForm(ModelForm):
             'title',
             'body',
         ]
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Başlık'}),
+            'body': forms.Textarea(attrs={'placeholder': 'Şiir metni'}),
+        }
