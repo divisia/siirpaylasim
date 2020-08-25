@@ -29,7 +29,14 @@
                 {% if request.user == user %}
                 <h6 class="mt-20"><a class="btn-brdr-grey color-ash plr-30" href="{% url 'identity:logout' %}"><b>Çıkış yap</b></a></h6>
                 {% endif %}
-
+                
+                {% if editable %}
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn-b-lg btn-brdr-grey plr-25 color-ash" type="submit"><b>Kaydet</b></button>
+                </form>
+                {% endif %}
 
                 <div class="row">
 

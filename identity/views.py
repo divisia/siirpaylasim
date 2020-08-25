@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.core.exceptions import SuspiciousOperation
 from django.contrib.auth import login, logout, authenticate
@@ -6,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.views.generic import DetailView, ListView
 from django.conf import settings
+from .forms import UserProfileForm
 
 class LogoutView(View):
     def get(self, request):
@@ -33,14 +35,32 @@ class RegisterView(View):
             raise SuspiciousOperation
 
 
-class UserDetail(DetailView):
-    model = User
-    context_object_name = 'user'
+class UserDetail(View):
+    template = 'auth/user_detail.html'
 
-    def get_context_data(self, *args, **kwargs):
-        ctx = super(UserDetail, self).get_context_data(*args, **kwargs)
-        ctx['editable'] = self.request.user == self.get_object()
-        return ctx
+    def get(self, request, pk):
+        try:
+            user = User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return HttpResponse(status=404)
+        return render(request, self.template, {
+            'editable': request.user == user,
+            'user': user,
+            'form': UserProfileForm(instance=user.profile),
+        })
+    
+    @login_required
+    def post(self, request, pk):
+        form = UserProfileForm(request.POST, instance=request.user.profile)
+        if not form.is_valid():
+            return render(request, self.template, {
+                'editable': request.user == user,
+                'user': user,
+                'form': form,
+            })
+        profile = form.save()
+        return redirect(reverse('identity:user_detail', kwargs={'pk':request.user.pk}))
+    
 
 
 class UserList(ListView):
