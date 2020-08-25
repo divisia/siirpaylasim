@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="slider-main h-500x h-sm-auto pos-relative pt-95 pb-25">
+    <div class="img-bg bg-11 bg-layer-4"></div>
+    <div class="container-fluid h-100 mt-xs-50">
+        <div class="dplay-tbl">
+            <div class="dplay-tbl-cell color-white text-center">
+
+                <h1 class="ptb-50"><b>Tüm yazarlarımızın listesi</b></h1>
+
+            </div><!-- dplay-tbl-cell -->
+        </div><!-- dplay-tbl -->
+    </div><!-- container -->
+</div><!-- slider-main -->
+
+
+<section class="bg-1-white ptb-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-md-12 col-lg-8 ptb-50 pr-30 pr-md-15">
+
+
+
+                <div class="row">
+                    {% for user in users %}
+
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-30">
+                        <div class="card h-100">
+                            <div class="h-50 pt-15">
+                                <!-- SETTING IMAGE WITH bg-7 -->
+                                <div class="plr-25 ptb-15 pos-relative h-100 bg-12 bg-layer-4 color-white">
+                                    <div class="dplay-tbl">
+                                        <div class="dplay-tbl-cell">
+                                            <h4 class="mtb-10"><a href="{% url 'identity:user_detail' pk=user.pk %}"><b>{{ user.username }}</b></a></h4>
+                                            <br><br><br><br>
+                                        </div><!-- dplay-tbl-cell -->
+                                    </div><!-- dplay-tbl -->
+                                </div><!-- plr-25 ptb-15 -->
+                            </div>
+                            <!--h-50 bg-white -->
+
+                        </div><!-- card -->
+                    </div><!-- col-lg-4 col-md-6 -->
+                    {% endfor %}
+                </div><!-- row -->
+
+            </div><!-- col-sm-9 -->
+        </div><!-- row -->
+    </div><!-- container -->
+</section>
+
+
+{% endblock %}

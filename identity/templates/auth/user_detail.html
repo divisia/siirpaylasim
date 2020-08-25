@@ -2,16 +2,66 @@
 
 {% block body %}
 
-<h5>kullanıcı sayfası</h5>
-<h2>{{ user.username }}</h2>
+<div class="slider-main h-500x h-sm-auto pos-relative pt-95 pb-25">
+    <div class="img-bg bg-11 bg-layer-4"></div>
+    <div class="container-fluid h-100 mt-xs-50">
+        <div class="dplay-tbl">
+            <div class="dplay-tbl-cell color-white text-center">
 
-<h4>şiirleri</h4>
-<ol>
-    {% for entry in user.entries.all %}
-    <li><a href="{{ entry.get_absolute_url }}">{{ entry }}</a></li>
-    {% empty %}
-    <li>[hiç yok]</li>
-    {% endfor %}
-</ol>
+                <h1 class="ptb-50"><b>{{ user.username }}</b> hakkında</h1>
+                {% if user.profile.about %}
+                <h3 class="ptb-50">{{ user.profile.about|truncatechars:120 }}</h3>
+                {% endif %}
+
+            </div><!-- dplay-tbl-cell -->
+        </div><!-- dplay-tbl -->
+    </div><!-- container -->
+</div><!-- slider-main -->
+
+
+<section class="bg-1-white ptb-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-md-12 col-lg-8 ptb-50 pr-30 pr-md-15">
+
+                <h4 class="mb-30 mt-20 clearfix"><b>Şiirleri</b></h4>
+                {% if request.user == user %}
+                <h6 class="mt-20"><a class="btn-brdr-grey color-ash plr-30" href="{% url 'identity:logout' %}"><b>Çıkış yap</b></a></h6>
+                {% endif %}
+
+
+                <div class="row">
+
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-30">
+                        <div class="card h-100">
+
+                            {% for entry in user.entries.all %}
+                            <div class="h-50 pb-15">
+                                <div class="plr-25 h-100 ptb-15 bg-white">
+                                    <div class="dplay-tbl">
+                                        <div class="dplay-tbl-cell">
+
+                                            <h5 class="color-ash"><b>{{ user.username }}</b></h5>
+                                            <h4 class="mtb-10"><a href="{{ entry.get_absolute_url }}"><b>{{ entry.title }}</b></a></h4>
+                                            <br><br><br><br><br>
+
+                                        </div><!-- dplay-tbl-cell -->
+                                    </div><!-- dplay-tbl -->
+                                </div><!-- plr-25 ptb-15 -->
+                            </div>
+                            {% endfor %}
+
+                        </div><!-- card -->
+                    </div><!-- col-lg-4 col-md-6 -->
+
+
+                </div><!-- row -->
+            </div><!-- col-sm-3 -->
+        </div><!-- row -->
+    </div><!-- container -->
+</section>
+
 
 {% endblock %}

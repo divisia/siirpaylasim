@@ -9,7 +9,7 @@ from django.conf import settings
 
 
 class RegisterView(View):
-    template = 'registration/login.html'
+    template = 'registration/register.html'
 
     def get(self, request):
         return render(request, self.template, {'form': UserCreationForm()})
@@ -34,7 +34,7 @@ class UserDetail(DetailView):
     context_object_name = 'user'
 
     def get_context_data(self, *args, **kwargs):
-        ctx = super(ProfileView, self).get_context_data(*args, **kwargs)
+        ctx = super(UserDetail, self).get_context_data(*args, **kwargs)
         ctx['editable'] = self.request.user == self.get_object()
         return ctx
 
