@@ -19,7 +19,7 @@ class RegisterView(View):
 
     def get(self, request):
         return render(request, self.template, {'form': UserCreationForm()})
-    
+
     def post(self, request):
         form = UserCreationForm(request.POST)
         try:
@@ -48,9 +48,11 @@ class UserDetail(View):
             'user': user,
             'form': UserProfileForm(instance=user.profile),
         })
-    
-    @login_required
+
+
     def post(self, request, pk):
+        if not request.user.is_authenticated:
+            return HttpResponse('Forbidden', status=403)
         form = UserProfileForm(request.POST, instance=request.user.profile)
         if not form.is_valid():
             return render(request, self.template, {
@@ -60,7 +62,7 @@ class UserDetail(View):
             })
         profile = form.save()
         return redirect(reverse('identity:user_detail', kwargs={'pk':request.user.pk}))
-    
+
 
 
 class UserList(ListView):
