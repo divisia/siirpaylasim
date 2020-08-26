@@ -6,14 +6,14 @@
 
 {% block body %}
 <div class="pinax-messages-create-container">
-    <h2>New Message</h2>
+    <h2>Yeni mesaj oluştur</h2>
 
     <form class="comment-form" action="{% url "pinax_messages:message_create" %}" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
         <div class="form-actions">
-            <a href="{% url "pinax_messages:inbox" %}" class="cancel">Cancel</a>
-            <button>Send</button>
+            <a href="{% url "pinax_messages:inbox" %}" class="cancel">İptal</a>
+            <button type="submit">Gönder</button>
         </div>
     </form>
 </div>

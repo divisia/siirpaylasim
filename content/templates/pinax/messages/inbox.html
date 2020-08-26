@@ -2,34 +2,34 @@
 ​
 {% load i18n %}
 {% load pinax_messages_tags %}
-​
-{% block head_title %}Messages{% endblock %}
-​
+​​
 {% block body_class %}{{ block.super }} pinax-messages-inbox{% endblock %}
 ​
 {% block body %}
 <div class="pinax-messages-inbox-container">
     <h2 class="with-actions">
-        Inbox
-        <a class="button" href="{% url "pinax_messages:message_create" %}">
+        Gelen kutusu
+        <br>
+        <a class="button" href="{% url 'pinax_messages:message_create' %}">
             <i class="fas fa-envelope"></i>
-            New Message
+            Yeni mesaj
         </a>
     </h2>
 
     <section class="mailbox">
         {% for thread in threads %}
-            <div class="thread {% if thread|unread:user %}unread{% endif %}">
-                <a href="{{thread.get_absolute_url}}">
+            <div style="border:1px solid black; padding:10px;" class="thread {% if thread|unread:user %}unread{% endif %}">
+                <a href="{{ thread.get_absolute_url }}">
                     <div class="participants">{{ thread.users.all|join:", " }}</div>
                     <div class="latest-message">
-                        <p class="subject">{{ thread.subject }}</p>
+                        <p class="subject">{% if thread in threads_unread %}[Okunmadı]  {% endif %}{{ thread.subject }}</p>
                         <p class="content">{{ thread.latest_message.content }}</p>
                     </div>
                 </a>
             </div>
+            <br>
         {% empty %}
-            <div class="no-messages">You have no messages.</div>
+            <div class="no-messages">Hiç mesajınız yok.</div>
         {% endfor %}
     </section>
 </div>

@@ -21,6 +21,7 @@
     {% endblock head %}
 </head>
 <body>
+	{% block override %}
     <header>
 		<a class="logo" href="#"><img src="{% static 'quitelight/images/logo-white.png' %}" alt="Logo"></a>
 		
@@ -38,6 +39,7 @@
 			<li><a href="{% url 'identity:login' %}">Giriş yap</a></li>
 			<li><a href="{% url 'identity:register' %}">Kaydol</a></li>
 			{% else %}
+			<li><a href="{% url 'pinax_messages:inbox' %}">Mesajlar</a></li>
 			<li><a href="{% url 'identity:user_detail' request.user.pk %}">Hesap: {{ request.user.username }}</a></li>
 			{% endif %}
 		</ul>
@@ -105,5 +107,6 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</footer>
+	{% endblock override %}
 </body>
 </html>
